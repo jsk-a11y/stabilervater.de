@@ -636,13 +636,15 @@
             <p class="guide-kicker">Kostenloser Guide</p>
             <h2 id="guide-title">Hochkonflikt – was nun?</h2>
             <p class="card-intro">Die ersten Schritte aus dem Hochkonflikt. Klar, kompakt und direkt in dein Postfach.</p>
-            <form class="lead-form" novalidate>
+            <form class="lead-form" id="hero-lead-form" method="post" action="https://1eeb9475.sibforms.com/serve/MUIFAORzOdZzt8FVD465O9AHmPpk0A6YNfCMfXn0Iqozo9oCleEK74ILQP4QjDHKB6MoflCkDTRhReKuITmoBGKwXj6N1GYMUgSh2QuoK05WzntSu4Ouphn3aPDOSCv00dOb--YFCcdnWJc7dP7cRFUYYihnE7jMfY1KzvIwZ2DY9pWo9j_LtzW3q4rxP0a_JbguucowDJHqbZ-f-g==" target="brevo-submit-frame" novalidate>
               <label class="sr-only" for="hero-email">E-Mail-Adresse</label>
-              <input class="email-field" id="hero-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required aria-describedby="hero-error hero-consent">
+              <input class="email-field" id="hero-email" name="EMAIL" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required aria-describedby="hero-error hero-consent">
               <p class="form-error" id="hero-error">Bitte gib eine gültige E-Mail-Adresse ein.</p>
-              <input type="hidden" name="consent_version" value="landingpage-v2-2026-09">
+              <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
+              <input type="hidden" name="locale" value="de">
+              <input type="hidden" name="html_type" value="simple">
               <div class="consent-check">
-                <input id="hero-consent-check" name="consent" type="checkbox" required>
+                <input id="hero-consent-check" name="OPT_IN" value="1" type="checkbox" required>
                 <label for="hero-consent-check">Ich willige ein, den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. <a href="#datenschutz">Datenschutz</a></label>
               </div>
               <p class="consent-error">Bitte bestätige deine Einwilligung.</p>
@@ -658,8 +660,7 @@
           <div class="success-state" aria-hidden="true" role="status">
             <div class="success-symbol" aria-hidden="true">✓</div>
             <h3>Fast geschafft</h3>
-            <p>Bitte öffne jetzt die Bestätigungs-Mail. Erst nach deinem Klick erhältst du den Guide.</p>
-            <p class="consent-copy">Dies ist eine Entwurfs-Vorschau. Vor dem Livegang wird das Formular mit dem Double-Opt-in-System verbunden.</p>
+            <p>Bitte bestätige deine E-Mail-Adresse über den Link in der E-Mail, die wir dir gerade gesendet haben. Prüfe bei Bedarf auch deinen Spam-Ordner.</p>
           </div>
         </aside>
       </div>
@@ -770,15 +771,17 @@
         <p class="eyebrow">Der erste klare Schritt</p>
         <h2 id="final-title">Hochkonflikt – was nun?</h2>
         <p>Hol dir den kostenlosen Guide und bring wieder Ordnung in die nächsten Entscheidungen.</p>
-        <form class="lead-form final-form" id="footer-lead-form" novalidate>
+        <form class="lead-form final-form" id="footer-lead-form" method="post" action="https://1eeb9475.sibforms.com/serve/MUIFAORzOdZzt8FVD465O9AHmPpk0A6YNfCMfXn0Iqozo9oCleEK74ILQP4QjDHKB6MoflCkDTRhReKuITmoBGKwXj6N1GYMUgSh2QuoK05WzntSu4Ouphn3aPDOSCv00dOb--YFCcdnWJc7dP7cRFUYYihnE7jMfY1KzvIwZ2DY9pWo9j_LtzW3q4rxP0a_JbguucowDJHqbZ-f-g==" target="brevo-submit-frame" novalidate>
           <label class="sr-only" for="footer-email">E-Mail-Adresse</label>
-          <input class="email-field" id="footer-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required aria-describedby="footer-error footer-consent">
+          <input class="email-field" id="footer-email" name="EMAIL" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required aria-describedby="footer-error footer-consent">
           <p class="form-error" id="footer-error">Bitte gib eine gültige E-Mail-Adresse ein.</p>
-          <input type="hidden" name="consent_version" value="landingpage-v2-2026-09">
+          <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
+          <input type="hidden" name="locale" value="de">
+          <input type="hidden" name="html_type" value="simple">
           <button class="submit-button" type="submit">Guide kostenlos erhalten</button>
         </form>
         <div class="consent-check final-consent">
-          <input id="footer-consent-check" form="footer-lead-form" name="consent" type="checkbox" required>
+          <input id="footer-consent-check" form="footer-lead-form" name="OPT_IN" value="1" type="checkbox" required>
           <label for="footer-consent-check">Ich willige ein, den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. <a href="#datenschutz">Datenschutz</a></label>
         </div>
         <p class="consent-error final-consent">Bitte bestätige deine Einwilligung.</p>
@@ -808,6 +811,8 @@
     </div>
   </footer>
 
+  <iframe name="brevo-submit-frame" title="Brevo Formularübertragung" hidden></iframe>
+
   <script>
     (function () {
       "use strict";
@@ -818,7 +823,6 @@
 
       document.querySelectorAll(".lead-form").forEach(function (form) {
         form.addEventListener("submit", function (event) {
-          event.preventDefault();
           var input = form.querySelector('input[type="email"]');
           var consent = form.querySelector('input[type="checkbox"]');
           if (!consent && form.classList.contains("final-form")) {
@@ -832,6 +836,7 @@
           }
 
           if (!valid || !consentValid) {
+            event.preventDefault();
             input.focus();
             return;
           }
@@ -839,9 +844,12 @@
           var heroCard = document.querySelector(".signup-card");
           var heroInput = document.getElementById("hero-email");
           if (input !== heroInput) {
+            event.preventDefault();
             heroInput.value = input.value.trim();
             document.getElementById("hero-consent-check").checked = true;
             heroCard.scrollIntoView({ behavior: "smooth", block: "center" });
+            document.getElementById("hero-lead-form").requestSubmit();
+            return;
           }
 
           heroCard.querySelector("#form-content").style.display = "none";
