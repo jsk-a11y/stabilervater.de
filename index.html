@@ -640,11 +640,11 @@
               <input class="email-field" id="hero-email" name="EMAIL" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required="" aria-describedby="hero-error hero-consent">
               <p class="form-error" id="hero-error">Bitte gib eine gültige E-Mail-Adresse ein.</p>
               <input type="text" name="email_address_check" tabindex="-1" autocomplete="off" aria-hidden="true" hidden="">
-              <input type="hidden" name="locale" value="de">
-              <input type="hidden" name="html_type" value="simple">
+              <input type="hidden" name="locale">
+              <input type="hidden" name="html_type">
               <div class="consent-check">
                 <input id="hero-consent-check" name="OPT_IN" value="1" type="checkbox" required="">
-                <label for="hero-consent-check">Ich willige ein, den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. <a href="#datenschutz">Datenschutz</a></label>
+                <label for="hero-consent-check">Ich willige ein, den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. <a href="datenschutz.html">Datenschutz</a></label>
               </div>
               <p class="consent-error">Bitte bestätige deine Einwilligung.</p>
               <button class="submit-button" type="submit">Guide kostenlos erhalten</button>
@@ -775,16 +775,16 @@
           <input class="email-field" id="footer-email" name="EMAIL" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required="" aria-describedby="footer-error footer-consent">
           <p class="form-error" id="footer-error">Bitte gib eine gültige E-Mail-Adresse ein.</p>
           <input type="text" name="email_address_check" tabindex="-1" autocomplete="off" aria-hidden="true" hidden="">
-          <input type="hidden" name="locale" value="de">
-          <input type="hidden" name="html_type" value="simple">
+          <input type="hidden" name="locale">
+          <input type="hidden" name="html_type">
           <button class="submit-button" type="submit">Guide kostenlos erhalten</button>
         </form>
         <div class="consent-check final-consent">
           <input id="footer-consent-check" form="footer-lead-form" name="OPT_IN" value="1" type="checkbox" required="">
-          <label for="footer-consent-check">Ich willige ein, den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. <a href="#datenschutz">Datenschutz</a></label>
+          <label for="footer-consent-check">Ich willige ein, den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. <a href="datenschutz.html">Datenschutz</a></label>
         </div>
         <p class="consent-error final-consent">Bitte bestätige deine Einwilligung.</p>
-        <p class="consent-copy final-consent" id="footer-consent">Double-Opt-in: Du bestätigst deine Anmeldung zunächst per E-Mail. Danach erhältst du den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH). Jederzeit abmeldbar. <a href="#datenschutz">Datenschutz</a></p>
+        <p class="consent-copy final-consent" id="footer-consent">Double-Opt-in: Du bestätigst deine Anmeldung zunächst per E-Mail. Danach erhältst du den Guide und E-Mails von Stabiler Vater (KIM Consulting GmbH). Jederzeit abmeldbar. <a href="datenschutz.html">Datenschutz</a></p>
       </div>
     </section>
   </main>
@@ -804,8 +804,8 @@
       </div>
       <nav class="footer-links" aria-label="Rechtliche Hinweise">
         <a id="impressum" href="impressum.html">Impressum</a>
-        <a id="datenschutz" href="mailto:kontakt@stabilervater.de?subject=Datenschutz%20stabilervater.de">Datenschutz</a>
-        <a href="mailto:kontakt@stabilervater.de">Kontakt</a>
+        <a id="datenschutz" href="datenschutz.html">Datenschutz</a>
+        <a href="#guide-anfordern" aria-label="Kontakt: zum E-Mail-Eingabefeld">Kontakt</a>
       </nav>
     </div>
   </footer>
@@ -815,6 +815,17 @@
   <script>
     (function () {
       "use strict";
+
+      function focusGuideEmail() {
+        if (window.location.hash !== "#guide-anfordern") return;
+        window.setTimeout(function () {
+          var emailInput = document.getElementById("hero-email");
+          if (emailInput) emailInput.focus({ preventScroll: true });
+        }, 450);
+      }
+
+      window.addEventListener("hashchange", focusGuideEmail);
+      focusGuideEmail();
 
       function isValidEmail(value) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
