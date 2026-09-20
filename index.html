@@ -1199,7 +1199,7 @@
               credentials: "omit",
               body: JSON.stringify(payload)
             });
-            data-endpoint="https://n8n.kim-con.com/webhook/stabiler-vater-lead-signup" data-tracking-endpoint="https://n8n.kim-con.com/webhook/stabilervater-landingpage-leads"
+            if (!response.ok) throw new Error("Lead endpoint returned " + response.status); if (form.dataset.trackingEndpoint) { var trackingPayload = Object.assign({}, payload, { funnel_type: leadType === "strategy_session" ? "strategie_session" : "guide", timestamp: payload.requested_at, lead_status: "Neuer Lead" }); try { var trackingResponse = await fetch(form.dataset.trackingEndpoint, { method: "POST", headers: { "Content-Type": "text/plain;charset=UTF-8", "Accept": "application/json" }, credentials: "omit", body: JSON.stringify(trackingPayload) }); if (!trackingResponse.ok) console.warn("Lead tracking returned " + trackingResponse.status); } catch (trackingError) { console.warn("Lead tracking failed", trackingError); } }
           }
 
           // Jeder Formulartyp verändert ausschließlich den Success-State seiner eigenen Karte.
