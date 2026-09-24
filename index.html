@@ -772,7 +772,7 @@
             <p class="guide-kicker">Kostenloser Guide</p>
             <h2 id="guide-title">Hochkonflikt – was nun?</h2>
             <p class="card-intro">Die ersten Schritte aus dem Hochkonflikt. Klar, kompakt und direkt in dein Postfach.</p>
-            <form class="lead-form" id="guide-hero-form" data-lead-type="guide" data-endpoint="https://n8n.kim-con.com/webhook/stabiler-vater-lead-signup" data-tracking-endpoint="https://n8n.kim-con.com/webhook/stabilervater-landingpage-leads" novalidate>
+            <form class="lead-form" id="guide-hero-form" data-lead-type="guide" data-endpoint="https://n8n.kim-con.com/webhook/stabiler-vater-lead-signup" novalidate>
               <label class="sr-only" for="hero-email">E-Mail-Adresse</label>
               <input class="email-field" id="hero-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required aria-describedby="hero-error hero-consent">
               <p class="form-error" id="hero-error">Bitte gib eine gültige E-Mail-Adresse ein.</p>
@@ -799,6 +799,7 @@
               <p class="consent-error">Bitte bestätige deine Einwilligung.</p>
               <button class="submit-button" type="submit">Guide kostenlos erhalten</button>
               <p class="consent-copy" id="hero-consent">Du bestätigst deine Adresse anschließend per E-Mail (Double-Opt-in). Jederzeit abmeldbar.</p>
+              <p class="consent-copy">Wenn deine Anmeldung bestätigt und weiterhin aktiv ist, erhältst du 48 Stunden später eine E-Mail mit einem Link zu einem freiwilligen Situationscheck. Das Formular wird über Tally bereitgestellt. Erst dort entscheidest du selbst, ob du persönliche Angaben übermitteln möchtest.</p>
               <p class="submission-error" role="alert">Die Anmeldung konnte gerade nicht übermittelt werden. Bitte versuche es erneut.</p>
             </form>
             <div class="trust-row" aria-label="Hinweise">
@@ -949,7 +950,7 @@
             <p class="guide-kicker">Strategie-Session</p>
             <h2 id="session-form-title">Schildere mir gern deine aktuelle Situation.</h2>
             <p class="card-intro">Hol dir den Strategie-Session-Fragebogen und bring wieder Ordnung in die nächsten Entscheidungen.</p>
-            <form class="session-form" id="strategy-session-form" data-lead-type="strategy_session" data-endpoint="https://n8n.kim-con.com/webhook/stabiler-vater-lead-signup" data-tracking-endpoint="https://n8n.kim-con.com/webhook/stabilervater-landingpage-leads" novalidate>
+            <form class="session-form" id="strategy-session-form" data-lead-type="strategy_session" data-endpoint="https://n8n.kim-con.com/webhook/stabiler-vater-lead-signup" novalidate>
               <label class="sr-only" for="session-email">E-Mail-Adresse</label>
               <input class="email-field" id="session-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required aria-describedby="session-error session-consent">
               <p class="form-error" id="session-error">Bitte gib eine gültige E-Mail-Adresse ein.</p>
@@ -1199,7 +1200,7 @@
               credentials: "omit",
               body: JSON.stringify(payload)
             });
-            if (!response.ok) throw new Error("Lead endpoint returned " + response.status); if (form.dataset.trackingEndpoint) { var trackingPayload = Object.assign({}, payload, { funnel_type: leadType === "strategy_session" ? "strategie_session" : "guide", timestamp: payload.requested_at, lead_status: "Neuer Lead" }); try { var trackingResponse = await fetch(form.dataset.trackingEndpoint, { method: "POST", headers: { "Content-Type": "text/plain;charset=UTF-8", "Accept": "application/json" }, credentials: "omit", body: JSON.stringify(trackingPayload) }); if (!trackingResponse.ok) console.warn("Lead tracking returned " + trackingResponse.status); } catch (trackingError) { console.warn("Lead tracking failed", trackingError); } }
+            if (!response.ok) throw new Error("Lead endpoint returned " + response.status);
           }
 
           // Jeder Formulartyp verändert ausschließlich den Success-State seiner eigenen Karte.
