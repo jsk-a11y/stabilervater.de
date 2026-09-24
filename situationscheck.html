@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f0e6">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src https://tally.so; connect-src https://n8n.kim-con.com; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'self'; form-action 'self' https://tally.so">
+  <title>Meine Situation einordnen | Stabiler Vater</title>
+  <meta name="description" content="Persönlicher Situationscheck von Stabiler Vater.">
+  <style>
+    :root{--cream:#f4f0e6;--paper:#fbf9f3;--ink:#20201d;--muted:#6d6a62;--gold:#c69d32;--line:#ded6c4;--serif:Georgia,"Times New Roman",serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--cream);color:var(--ink);font:16px/1.5 var(--sans)}body{min-height:100vh}.site-header{height:72px;border-bottom:1px solid var(--line);background:rgba(251,249,243,.96)}.header-inner{width:min(1180px,calc(100% - 32px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:grid;line-height:1.05;text-decoration:none;color:var(--ink)}.brand strong{font-family:var(--serif);font-size:1rem;letter-spacing:.04em;text-transform:uppercase}.brand span{margin-top:6px;color:#9a7720;font-size:.61rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase}.secure{color:var(--muted);font-size:.76rem}.form-shell{width:min(100%,980px);min-height:calc(100vh - 72px);margin:auto;padding:18px 12px 30px}.form-frame{display:block;width:100%;height:calc(100vh - 120px);min-height:720px;border:0;background:var(--paper)}.message{display:none;width:min(620px,100%);margin:12vh auto 0;padding:42px;border:1px solid var(--line);background:var(--paper);text-align:center}.message h1{margin:0;font-family:var(--serif);font-size:clamp(2rem,7vw,3.6rem);font-weight:500}.message p{margin:20px 0 0;color:var(--muted)}.message a{display:inline-flex;margin-top:28px;padding:14px 20px;background:var(--ink);color:#fff;text-decoration:none;font-weight:750}:focus-visible{outline:3px solid var(--gold);outline-offset:4px}@media(max-width:640px){.site-header{height:64px}.secure{display:none}.form-shell{padding:8px 0 0}.form-frame{height:calc(100vh - 64px);min-height:680px}}
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="index.html" aria-label="Stabiler Vater, Startseite"><strong>Stabiler Vater</strong><span>Klarer Weg</span></a><span class="secure">Persönlicher Situationscheck</span></div></header>
+  <main class="form-shell">
+    <iframe id="situation-form" class="form-frame" title="Meine Situation einordnen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allow="clipboard-write"></iframe>
+    <section id="invalid-link" class="message" aria-live="polite"><h1>Link nicht gültig</h1><p>Bitte öffne den persönlichen Link aus deiner E-Mail erneut. Falls das Problem bleibt, schreibe an kontakt@stabilervater.de.</p><a href="kontakt.html">Kontakt aufnehmen</a></section>
+  </main>
+  <script>
+    (function(){
+      var params=new URLSearchParams(location.search),ref=String(params.get("ref")||"").trim();
+      history.replaceState({},"",location.pathname);
+      if(!/^[0-9a-f-]{36}$/i.test(ref)){
+        document.getElementById("situation-form").hidden=true;
+        document.getElementById("invalid-link").style.display="block";
+        return;
+      }
+      var tally="https://tally.so/embed/1A8M8l?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&tracking_id="+encodeURIComponent(ref)+"&source=guide_48h_email";
+      document.getElementById("situation-form").src=tally;
+      fetch("https://n8n.kim-con.com/webhook/stabiler-vater-situationscheck-start?ref="+encodeURIComponent(ref),{method:"GET",mode:"no-cors",credentials:"omit",cache:"no-store",redirect:"manual"}).catch(function(){});
+    }());
+  </script>
+</body>
+</html>
