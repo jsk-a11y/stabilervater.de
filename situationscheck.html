@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f4f0e6">
   <meta name="robots" content="noindex,nofollow">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src https://tally.so; connect-src https://n8n.kim-con.com; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'self'; form-action 'self' https://tally.so">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src https://tally.so https://n8n.kim-con.com; connect-src https://n8n.kim-con.com; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'self'; form-action 'self' https://tally.so">
   <title>Meine Situation einordnen | Stabiler Vater</title>
   <meta name="description" content="Persönlicher Situationscheck von Stabiler Vater.">
   <style>
@@ -17,7 +17,7 @@
   <header class="site-header"><div class="header-inner"><a class="brand" href="index.html" aria-label="Stabiler Vater, Startseite"><strong>Stabiler Vater</strong><span>Klarer Weg</span></a><span class="secure">Persönlicher Situationscheck</span></div></header>
   <main class="form-shell">
     <iframe id="situation-form" class="form-frame" title="Meine Situation einordnen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allow="clipboard-write"></iframe>
-    <section id="invalid-link" class="message" aria-live="polite"><h1>Link nicht gültig</h1><p>Bitte öffne den persönlichen Link aus deiner E-Mail erneut. Falls das Problem bleibt, schreibe an kontakt@stabilervater.de.</p><a href="kontakt.html">Kontakt aufnehmen</a></section>
+    <section id="invalid-link" class="message" aria-live="polite"><h1>Link nicht gültig</h1><p>Bitte öffne den persönlichen Link aus deiner E-Mail erneut. Ohne gültigen persönlichen Link können wir deine Angaben keinem bestätigten Kontakt zuordnen.</p><a href="index.html#direkt-klarheit">Neuen persönlichen Link anfordern</a></section>
   </main>
   <script>
     (function(){
@@ -28,9 +28,7 @@
         document.getElementById("invalid-link").style.display="block";
         return;
       }
-      var tally="https://tally.so/embed/1A8M8l?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&tracking_id="+encodeURIComponent(ref)+"&source=guide_48h_email";
-      document.getElementById("situation-form").src=tally;
-      fetch("https://n8n.kim-con.com/webhook/stabiler-vater-situationscheck-start?ref="+encodeURIComponent(ref),{method:"GET",mode:"no-cors",credentials:"omit",cache:"no-store",redirect:"manual"}).catch(function(){});
+      document.getElementById("situation-form").src="https://n8n.kim-con.com/webhook/stabiler-vater-situationscheck-start?ref="+encodeURIComponent(ref);
     }());
   </script>
 </body>
