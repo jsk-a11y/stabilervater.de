@@ -157,14 +157,20 @@
       text-transform: uppercase;
     }
     .header-link {
-      border-bottom: 1px solid var(--gold-dark);
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 15px;
+      border: 1px solid rgba(226, 199, 120, .48);
       color: var(--muted);
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .08em;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .07em;
       text-decoration: none;
       text-transform: uppercase;
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
     }
+    .header-link:hover { border-color: var(--gold-bright); background: rgba(226, 199, 120, .06); color: var(--text); }
     .header-nav {
       display: flex;
       align-items: center;
@@ -588,10 +594,14 @@
     }
 
     .session-hint {
-      background: #0d0f10;
+      background:
+        linear-gradient(135deg, rgba(200, 168, 92, .045), transparent 34%),
+        linear-gradient(180deg, #101214, #15181a);
+      color: var(--text);
       border-top: 1px solid var(--line-soft);
       border-bottom: 1px solid var(--line-soft);
     }
+    .session-hint .eyebrow { color: var(--gold-bright); }
     .session-hint-inner { max-width: 720px; margin: 0 auto; text-align: center; }
     .session-hint-inner h2 {
       margin: 0 0 16px;
@@ -604,14 +614,43 @@
       display: flex;
       flex-direction: column;
       gap: 11px;
-      max-width: 480px;
+      max-width: 560px;
       margin: 0 auto 30px;
       text-align: left;
     }
-    .session-hint-highlights p { margin: 0; color: var(--muted); font-size: .92rem; }
-    .session-hint-highlights strong { color: var(--text); font-weight: 650; }
+    .session-hint-highlights p {
+      margin: 0;
+      padding: 10px 14px;
+      border-left: 2px solid rgba(226, 199, 120, .72);
+      background: rgba(255,255,255,.025);
+      color: var(--muted);
+      font-size: .92rem;
+      text-align: left;
+      text-align-last: auto;
+      hyphens: none;
+    }
+    .session-hint-highlights strong { color: var(--text); font-weight: 700; }
     .session-hint-highlights .arrow { color: var(--gold-bright); }
-    .session-signup-card { max-width: 560px; margin: 0 auto; text-align: left; }
+    .session-signup-card {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: left;
+      border-color: #d1c39f;
+      background: #fffdf8;
+      color: #171717;
+      box-shadow: 0 28px 78px rgba(0, 0, 0, .3);
+    }
+    .session-signup-card .guide-kicker { color: #8b6d22; }
+    .session-signup-card .card-intro,
+    .session-signup-card .consent-copy { color: #666158; }
+    .session-signup-card .email-field {
+      border-color: #cfc8b9;
+      background: #fff;
+      color: #171717;
+    }
+    .session-signup-card .email-field::placeholder { color: #77736b; }
+    .session-signup-card .consent-check label { color: #5f5b53; }
+    .session-signup-card .consent-check label a { color: #5a4516; }
 
     .final-cta { text-align: center; background: linear-gradient(180deg, #111416, #0d0f10); }
     .final-cta .eyebrow { margin-bottom: 20px; }
@@ -714,10 +753,12 @@
     @media (max-width: 620px) {
       .wrap { width: min(100% - 28px, var(--max)); }
       .site-header { position: absolute; }
-      .header-inner { min-height: 70px; }
-      .header-link { display: none; }
+      .header-inner { min-height: 106px; flex-wrap: wrap; padding: 12px 0; gap: 9px; }
+      .brand { width: 100%; justify-content: center; }
+      .header-nav { width: 100%; gap: 8px; }
+      .header-link, .header-cta { flex: 1; justify-content: center; min-height: 36px; padding: 0 7px; font-size: .58rem; white-space: nowrap; }
       .brand-logo { width: 205px; height: 62px; }
-      .hero { padding: 120px 0 60px; }
+      .hero { padding: 156px 0 60px; }
       h1 { font-size: clamp(3rem, 15vw, 4.5rem); }
       .signup-card { padding: 26px 20px; }
       .trust-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -728,7 +769,6 @@
       .problem-row p { grid-column: 2; }
       .hero-lead, .card-intro, .editorial-block p, .problem-row p, .story-copy p, .stance-copy p, .phase p, .session-hint-inner p:not(.eyebrow), .session-hint-highlights p, .final-cta > .wrap > p:not(.eyebrow), .footer-meta { text-align: left; }
       .keep-together { white-space: normal; }
-      .header-cta { padding: 0 10px; font-size: .64rem; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-links { justify-content: flex-start; }
       .cookie-banner { right: 10px; bottom: 10px; left: 10px; padding: 17px; }
@@ -747,8 +787,8 @@
         <span class="header-wordmark"><strong>Stabiler Vater.</strong><span>Klarer Weg.</span></span>
       </a>
       <nav class="header-nav" aria-label="Hauptnavigation">
-        <a class="header-link" href="#guide-anfordern" data-track-event="guide_cta_click">Kostenlosen Guide erhalten</a>
-        <a class="header-cta" href="#strategie-session" data-track-event="strategy_cta_click">Strategie-Session anfragen</a>
+        <a class="header-link" href="#direkt-klarheit" data-track-event="direct_clarity_cta_click">Direkt mehr Klarheit</a>
+        <a class="header-cta" href="#guide-anfordern" data-track-event="guide_cta_click">Kostenlosen Guide erhalten</a>
       </nav>
     </div>
   </header>
@@ -811,7 +851,7 @@
             <div class="success-symbol" aria-hidden="true">✓</div>
             <h3>Fast geschafft</h3>
             <p>Bitte öffne jetzt die Bestätigungs-Mail. Erst nach deinem Klick erhältst du den Guide.</p>
-            <p class="success-hint">Falls du nach dem Lesen merkst, dass deine Lage mehr braucht als der Guide: Du kannst jederzeit direkt eine <a href="#strategie-session">Strategie-Session anfragen</a>.</p>
+            <p class="success-hint">Wenn deine Anmeldung bestätigt und aktiv bleibt, erhältst du 48 Stunden später eine E-Mail mit der Möglichkeit, deine persönliche Situation einzuordnen.</p>
             <p class="consent-copy">Keine E-Mail erhalten? Bitte prüfe auch deinen Spam-Ordner.</p>
           </div>
         </aside>
@@ -934,35 +974,36 @@
       </div>
     </section>
 
-    <section class="section session-hint" id="strategie-session">
+    <section class="section session-hint" id="direkt-klarheit">
       <div class="wrap session-hint-inner">
-        <p class="eyebrow">Wenn deine Situation komplexer ist</p>
-        <h2>Direkt eine Strategie-Session anfragen.</h2>
-        <p>Brauchst du Unterstützung beim Aufbau einer eigenen Struktur, oder einen Austausch darüber, wie du Gespräche mit Anwalt, Gericht, Jugendamt, Familienhelfern und der anderen Elternseite besser steuerst und verstehst? Dann musst du nicht warten — auch nicht, bis du den Guide durchgearbeitet hast.</p>
+        <p class="eyebrow">Persönliche Einordnung</p>
+        <h2>Du möchtest direkt mehr Klarheit?</h2>
+        <p>Wenn deine Situation akut oder unübersichtlich ist – oder Jugendamt, Anwälte beziehungsweise das Familiengericht bereits beteiligt sind –, kannst du mir deine Lage direkt schildern.</p>
+        <p>Nach deiner bestätigten Anmeldung erhältst du per E-Mail einen persönlichen Link zum Situationscheck. Dort kannst du deine aktuelle Situation strukturiert beschreiben. Ich schaue mir deine Angaben persönlich an und prüfe, ob ich dir ein <strong>kostenfreies Klarheitsgespräch</strong> anbieten kann – und ob es der passende nächste Schritt für dich ist.</p>
         <div class="session-hint-highlights">
-          <p><strong>Reagieren statt Handeln</strong> <span class="arrow">→</span> konkreter 14-Tage-Handlungsrahmen</p>
-          <p><strong>Fehlende Dokumentation</strong> <span class="arrow">→</span> Ordnerstruktur & Doku-Tagebuch, sofort einsatzbereit</p>
-          <p><strong>Angst vor Kommunikationsfehlern</strong> <span class="arrow">→</span> geprüfte, sichere Kommunikationsstrategie</p>
+          <p><strong>Aktuelle Lage</strong> <span class="arrow">→</span> Belastung, Fristen und Beteiligte einordnen</p>
+          <p><strong>Kommunikation</strong> <span class="arrow">→</span> Muster und kritische Situationen sichtbar machen</p>
+          <p><strong>Nächste Ziele</strong> <span class="arrow">→</span> Prioritäten für die kommenden Wochen und Monate klären</p>
         </div>
         <div class="signup-card session-signup-card" aria-labelledby="session-form-title">
           <div id="session-form-content">
-            <p class="guide-kicker">Strategie-Session</p>
-            <h2 id="session-form-title">Schildere mir gern deine aktuelle Situation.</h2>
-            <p class="card-intro">Hol dir den Strategie-Session-Fragebogen und bring wieder Ordnung in die nächsten Entscheidungen.</p>
+            <p class="guide-kicker">Direkt zum Situationscheck</p>
+            <h2 id="session-form-title">Meine Situation beschreiben</h2>
+            <p class="card-intro">Bestätige zuerst deine E-Mail-Adresse. Danach erhältst du sofort deinen persönlichen Zugang zum Situationscheck.</p>
             <form class="session-form" id="strategy-session-form" data-lead-type="strategy_session" data-endpoint="https://n8n.kim-con.com/webhook/stabiler-vater-lead-signup" novalidate>
               <label class="sr-only" for="session-email">E-Mail-Adresse</label>
               <input class="email-field" id="session-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Deine E-Mail-Adresse" required aria-describedby="session-error session-consent">
               <p class="form-error" id="session-error">Bitte gib eine gültige E-Mail-Adresse ein.</p>
               <input type="hidden" name="lead_interest" value="strategy_session">
               <input type="hidden" name="lead_type" value="strategy_session">
-              <input type="hidden" name="source" value="stabilervater.de">
-              <input type="hidden" name="form_id" value="strategy_session_main_v4">
-              <input type="hidden" name="workflow_key" value="strategy_session_doi_delivery_v1">
-              <input type="hidden" name="delivery_asset_key" value="strategy_session_questionnaire_2026_09">
-              <input type="hidden" name="delivery_asset_version" value="2026-09-16">
+              <input type="hidden" name="source" value="stabilervater.de_direkt_klarheit">
+              <input type="hidden" name="form_id" value="direct_clarity_main_v1">
+              <input type="hidden" name="workflow_key" value="direct_clarity_doi_situationscheck_v1">
+              <input type="hidden" name="delivery_asset_key" value="situationscheck_direct_2026_09">
+              <input type="hidden" name="delivery_asset_version" value="2026-09-25">
               <input type="hidden" name="crm_operation" value="upsert_by_normalized_email">
               <input type="hidden" name="crm_preserve_existing_interests" value="true">
-              <input type="hidden" name="consent_version" value="lead-consent-v4-2026-09-16">
+              <input type="hidden" name="consent_version" value="direct-clarity-consent-v1-2026-09-25">
               <input type="hidden" name="website" value="">
               <input type="hidden" name="utm_source" value="">
               <input type="hidden" name="utm_medium" value="">
@@ -973,18 +1014,18 @@
               <input type="hidden" name="landing_page" value="">
               <div class="consent-check">
                 <input id="session-consent-check" name="consent" type="checkbox" required>
-                <label for="session-consent-check">Ich willige ein, den Strategie-Session-Fragebogen sowie die dazugehörigen E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. Hinweise zum Widerruf und zur Verarbeitung stehen in der <a href="datenschutz.html">Datenschutzerklärung</a>.</label>
+                <label for="session-consent-check">Ich willige ein, den persönlichen Link zum Situationscheck und die dazugehörigen E-Mails von Stabiler Vater (KIM Consulting GmbH) zu erhalten. Hinweise zum Widerruf und zur Verarbeitung stehen in der <a href="datenschutz.html">Datenschutzerklärung</a>.</label>
               </div>
               <p class="consent-error">Bitte bestätige deine Einwilligung.</p>
-              <button class="submit-button" type="submit">Strategie-Session-Fragebogen erhalten</button>
-              <p class="consent-copy" id="session-consent">Du bestätigst deine Adresse anschließend per E-Mail (Double-Opt-in). Danach erhältst du den Fragebogen und E-Mails von Stabiler Vater (KIM Consulting GmbH). Jederzeit abmeldbar.</p>
+              <button class="submit-button" type="submit">Meine Situation beschreiben</button>
+              <p class="consent-copy" id="session-consent">Das ist noch keine Buchung und keine automatische Zusage zu einem Gespräch.</p>
               <p class="submission-error" role="alert">Die Anfrage konnte gerade nicht übermittelt werden. Bitte versuche es erneut.</p>
             </form>
           </div>
           <div class="success-state" aria-hidden="true" role="status">
             <div class="success-symbol" aria-hidden="true">✓</div>
-            <h3>Fast geschafft</h3>
-            <p>Bitte öffne jetzt die Bestätigungs-Mail. Erst nach deinem Klick erhältst du den Strategie-Session-Fragebogen.</p>
+            <h3>Bitte bestätige jetzt deine E-Mail-Adresse.</h3>
+            <p>Danach erhältst du sofort deinen persönlichen Link zum Situationscheck.</p>
             <p class="consent-copy">Keine E-Mail erhalten? Bitte prüfe auch deinen Spam-Ordner.</p>
           </div>
         </div>
