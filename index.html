@@ -677,35 +677,49 @@
     .cookie-banner {
       position: fixed;
       z-index: 100;
-      right: 18px;
-      bottom: 18px;
-      left: 18px;
+      right: 10px;
+      bottom: 10px;
+      left: 10px;
       display: none;
-      max-width: 920px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 11px 13px;
       border: 1px solid var(--line);
       background: rgba(17, 20, 22, .98);
-      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      box-shadow: 0 12px 36px rgba(0,0,0,.4);
     }
-    .cookie-banner.is-visible { display: block; }
-    .cookie-banner h2 { margin-bottom: 8px; font-size: 1.35rem; font-weight: 500; }
-    .cookie-banner p { margin-bottom: 14px; color: var(--muted); font-size: .82rem; line-height: 1.5; }
-    .cookie-options { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 16px; }
-    .cookie-options label { color: var(--muted); font-size: .8rem; }
-    .cookie-options input { accent-color: var(--gold-bright); }
-    .cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cookie-banner.is-visible { display: grid; }
+    .cookie-banner h2 {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .cookie-banner p { margin: 0; color: var(--muted); font-size: .72rem; line-height: 1.42; }
+    .cookie-banner a { color: var(--text); }
+    .cookie-options[hidden], .cookie-button[hidden] { display: none; }
+    .cookie-actions { display: flex; flex-wrap: nowrap; gap: 7px; }
     .cookie-button {
-      min-height: 42px;
-      padding: 0 16px;
+      min-height: 36px;
+      padding: 7px 11px;
       border: 1px solid var(--gold);
       background: transparent;
       color: var(--gold-bright);
       cursor: pointer;
-      font-size: .73rem;
+      font-size: .65rem;
       font-weight: 800;
-      letter-spacing: .06em;
+      letter-spacing: .04em;
+      line-height: 1.2;
       text-transform: uppercase;
+      white-space: nowrap;
     }
     .cookie-button.primary { background: var(--gold-bright); color: #111315; }
 
@@ -771,8 +785,8 @@
       .keep-together { white-space: normal; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-links { justify-content: flex-start; }
-      .cookie-banner { right: 10px; bottom: 10px; left: 10px; padding: 17px; }
-      .cookie-actions { display: grid; grid-template-columns: 1fr; }
+       .cookie-banner { grid-template-columns: 1fr; align-items: stretch; padding: 12px 13px; }
+      .cookie-actions { display: grid; grid-template-columns: 1fr 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -1060,16 +1074,16 @@
   </footer>
 
   <section class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" aria-describedby="cookie-description">
-    <h2 id="cookie-title">Datenschutz-Einstellungen</h2>
-    <p id="cookie-description">Notwendige Funktionen laufen immer. Analyse und Marketing werden erst nach deiner Einwilligung aktiviert. Du kannst deine Auswahl jederzeit über den Footer ändern. Details stehen in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-    <div class="cookie-options">
+    <h2 id="cookie-title">Cookies &amp; Datenschutz</h2>
+    <p id="cookie-description">Wir nutzen notwendige Funktionen. Mit deiner Zustimmung hilft uns eine datensparsame Matomo-Statistik, die Website zu verbessern. <a href="datenschutz.html">Datenschutz</a></p>
+    <div class="cookie-options" hidden>
       <label><input type="checkbox" checked disabled> Notwendig</label>
       <label><input id="consent-analytics" type="checkbox"> Analyse</label>
       <label><input id="consent-marketing" type="checkbox"> Marketing</label>
     </div>
     <div class="cookie-actions">
       <button class="cookie-button" id="cookie-essential" type="button">Nur notwendige</button>
-      <button class="cookie-button" id="cookie-save" type="button">Auswahl speichern</button>
+      <button class="cookie-button" id="cookie-save" type="button" hidden>Auswahl speichern</button>
       <button class="cookie-button primary" id="cookie-all" type="button">Alle akzeptieren</button>
     </div>
   </section>
@@ -1293,7 +1307,7 @@
 
       document.getElementById("cookie-essential").addEventListener("click", function () { saveConsent(false, false); });
       document.getElementById("cookie-save").addEventListener("click", function () { saveConsent(analyticsCheckbox.checked, marketingCheckbox.checked); });
-      document.getElementById("cookie-all").addEventListener("click", function () { saveConsent(true, true); });
+      document.getElementById("cookie-all").addEventListener("click", function () { saveConsent(true, false); });
       document.getElementById("cookie-settings-open").addEventListener("click", function () {
         var consent = getConsent();
         analyticsCheckbox.checked = Boolean(consent.analytics);
