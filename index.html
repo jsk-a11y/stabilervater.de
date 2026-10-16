@@ -779,6 +779,7 @@
       *, *::before, *::after { transition: none !important; }
     }
   </style>
+  <script src="analytics.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -1078,7 +1079,7 @@
       "use strict";
 
       var CONFIG = {
-        consentVersion: "cookie-consent-v1-2026-09-15",
+        consentVersion: "cookie-consent-v2-2026-10-16",
         consentStorageKey: "sv_cookie_consent_v1",
         firstTouchStorageKey: "sv_first_touch_v1",
         previewMode: window.location.protocol === "file:",
@@ -1128,8 +1129,11 @@
 
       function trackEvent(name, properties) {
         if (!getConsent().analytics) return;
+        var details = properties || {};
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push(Object.assign({ event: name, event_timestamp: new Date().toISOString() }, properties || {}));
+        window.dataLayer.push(Object.assign({ event: name, event_timestamp: new Date().toISOString() }, details));
+        window._paq = window._paq || [];
+        window._paq.push(["trackEvent", "Website-Interaktion", name, details.target || details.form_id || ""]);
       }
 
       function activateConsent(consent) {
